@@ -2,6 +2,7 @@ import sys
 import os
 from fpdf import FPDF
 import tkinter as tk
+from  tkinter import ttk
 from tkinter import filedialog
 from PIL import Image, ImageTk
 from datetime import date
@@ -324,19 +325,33 @@ entryLink1.grid(column=1, row=7, sticky=tk.W, padx=5, pady=5)
 label7 = tk.Label(content_frame, text="Cena(1)[zł]:")
 label7.grid(column=0, row=11, sticky=tk.W, padx=5, pady=5)
 entryCena1 = tk.Entry(content_frame, width=10)
-entryCena1.grid(column=1, row=11, sticky=tk.W, padx=5, pady=5)
+entryCena1.grid(column=1, row=11, sticky=tk.N, padx=5, pady=5)
 
-CzyBrutto = tk.IntVar()
+CzyBruttoProdukt1 = tk.StringVar
 
-RadioNetto = tk.Radiobutton(content_frame, text="Netto", variable=CzyBrutto, value=0)
-RadioNetto.grid(column=1, row=14, sticky=tk.W, padx=5, pady=5)
-RadioBrutto = tk.Radiobutton(content_frame, text="Brutto", variable=CzyBrutto, value=1)
-RadioBrutto.grid(column=1, row=15, sticky=tk.W, padx=5, pady=5)
+Brutto1ComboBox = ttk.Combobox(content_frame, width=27, textvariable=CzyBruttoProdukt1)
+Brutto1ComboBox['values'] = ('Brutto', 'Netto')
+Brutto1ComboBox.grid(column=1,row=11, sticky=tk.E, padx=5, pady=5)
+Brutto1ComboBox.current(0)
+
+label7 = tk.Label(content_frame, text="Koszt dostawy(1)[zł]:")
+label7.grid(column=0, row=12, sticky=tk.W, padx=5, pady=5)
+entryCenaDostawy1 = tk.Entry(content_frame, width=10)
+entryCenaDostawy1.grid(column=1, row=12, sticky=tk.N, padx=5, pady=5)
+
+CzyBruttoDostawa1 = tk.StringVar
+
+BruttoDostawa1ComboBox = ttk.Combobox(content_frame, width=27, textvariable=CzyBruttoDostawa1)
+BruttoDostawa1ComboBox['values'] = ('Brutto', 'Netto')
+BruttoDostawa1ComboBox.grid(column=1,row=12, sticky=tk.E, padx=5, pady=5)
+BruttoDostawa1ComboBox.current(0)
+
+
 
 labelVAT = tk.Label(content_frame, text="VAT[%]:")
 labelVAT.grid(column=0, row=17, sticky=tk.W, padx=5, pady=5)
-entryCena1 = tk.Entry(content_frame, width=10)
-entryCena1.grid(column=1, row=17, sticky=tk.W, padx=5, pady=5)
+entryVAT = tk.Entry(content_frame, width=10)
+entryVAT.grid(column=1, row=17, sticky=tk.N, padx=5, pady=5)
 
 upload_button2 = tk.Button(content_frame, text="Upload Photo 2", command=upload_photo2)
 upload_button2.grid(column=0, row=19, pady=5, padx=5)
@@ -358,7 +373,27 @@ entryLink2.grid(column=1, row=25, sticky=tk.W, padx=5, pady=5)
 label10 = tk.Label(content_frame, text="Cena(2)[zł]:")
 label10.grid(column=0, row=28, sticky=tk.W, padx=5, pady=5)
 entryCena2 = tk.Entry(content_frame, width=10)
-entryCena2.grid(column=1, row=28, sticky=tk.W, padx=5, pady=5)
+entryCena2.grid(column=1, row=28, sticky=tk.N, padx=5, pady=5)
+
+CzyBruttoProdukt2 = tk.StringVar
+
+Brutto2ComboBox = ttk.Combobox(content_frame, width=27, textvariable=CzyBruttoProdukt2)
+Brutto2ComboBox['values'] = ('Brutto', 'Netto')
+Brutto2ComboBox.grid(column=1,row=28, sticky=tk.E, padx=5, pady=5)
+Brutto2ComboBox.current(0)
+
+label7 = tk.Label(content_frame, text="Koszt dostawy(2)[zł]:")
+label7.grid(column=0, row=30, sticky=tk.W, padx=5, pady=5)
+entryCenaDostawy2 = tk.Entry(content_frame, width=10)
+entryCenaDostawy2.grid(column=1, row=30, sticky=tk.N, padx=5, pady=5)
+
+CzyBruttoDostawa2 = tk.StringVar
+
+BruttoDostawa2ComboBox = ttk.Combobox(content_frame, width=27, textvariable=CzyBruttoDostawa2)
+BruttoDostawa2ComboBox['values'] = ('Brutto', 'Netto')
+BruttoDostawa2ComboBox.grid(column=1,row=30, sticky=tk.E, padx=5, pady=5)
+BruttoDostawa2ComboBox.current(0)
+
 
 label11 = tk.Label(content_frame, text="Wybór oferty:")
 label11.grid(column=0, row=31, sticky=tk.W, padx=5, pady=5)
