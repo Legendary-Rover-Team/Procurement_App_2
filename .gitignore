@@ -1,5 +1,5 @@
 *.pdf
 *.docx
 *.exe
-/build
-/dist
+build/
+dist/
