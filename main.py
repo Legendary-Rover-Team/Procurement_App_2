@@ -9,6 +9,26 @@ from datetime import date
 from tkinter import scrolledtext
 from pdf2docx import Converter
 
+
+# def testCounting(cena, dostawa, vat):
+#     a = tk.Toplevel(root)
+#     a.wm_title("Test cen z VAT")
+#
+#     cena = float(cena) * (1 + int(vat) / 100)
+#     str = "Cena: " + cena
+#
+#     dostawa = float(dostawa) * (1 + int(vat) / 100)
+#     str += " | Dostawa: " + dostawa
+#
+#     l = tk.Label(a, text=str)
+#     l.pack(fill="x")
+#
+#     b = tk.Button(win, text="OK", command=win.destroy)
+#     b.pack(fill="x")
+#
+#     a.attributes('-topmost', True)
+
+
 def popup_window():
     window = tk.Toplevel()
 
@@ -70,7 +90,18 @@ def CreatePDF():
     pdf.set_font('timesnew', 'B', 11)
     pdf.write(10, 'Cena: ')
     pdf.set_font('timesnew', '', 11)
-    pdf.write(10, entryCena1.get())
+    cena1 = float(entryCena1.get())
+    if Brutto1ComboBox.get() == "Netto":
+        cena1 *= (1 + int(entryVAT.get())/100)
+
+    cenados1 = float(entryCenaDostawy1.get())
+
+    if BruttoDostawa1ComboBox.get() == "Netto":
+        cenados1 *= (1 + int(entryVAT.get())/100)
+
+    cena1 += cenados1
+
+    pdf.write(10, format(cena1, ',.2f') + " PLN")
 
     pdf.ln(10)
     pdf.set_font('timesnew', 'B', 11)
@@ -95,7 +126,20 @@ def CreatePDF():
     pdf.set_font('timesnew', 'B', 11)
     pdf.write(10, 'Cena: ')
     pdf.set_font('timesnew', '', 11)
-    pdf.write(10, entryCena2.get())
+
+    cena2 = float(entryCena2.get())
+    if Brutto2ComboBox.get() == "Netto":
+        cena2 *= (1 + int(entryVAT.get()) / 100)
+
+    cenados2 = float(entryCenaDostawy2.get())
+
+    if BruttoDostawa2ComboBox.get() == "Netto":
+        cenados2 *= (1 + int(entryVAT.get()) / 100)
+
+    cena2 += cenados2
+
+    pdf.write(10, format(cena2, ',.2f') + " PLN")
+
 
     pdf.ln(10)
     pdf.set_font('timesnew', 'B', 11)
@@ -352,6 +396,11 @@ labelVAT = tk.Label(content_frame, text="VAT[%]:")
 labelVAT.grid(column=0, row=17, sticky=tk.W, padx=5, pady=5)
 entryVAT = tk.Entry(content_frame, width=10)
 entryVAT.grid(column=1, row=17, sticky=tk.N, padx=5, pady=5)
+entryVAT.insert(0, "23")
+
+# ##### TODO: delete this - test purposes only
+# test_button = tk.Button(content_frame, text="Test wartości", command=testCounting(entryCena1.get(), entryCenaDostawy1.get(), entryVAT.get()))
+# test_button.grid(sticky=tk.W, column=1, row=18, padx=5, pady=5)
 
 upload_button2 = tk.Button(content_frame, text="Upload Photo 2", command=upload_photo2)
 upload_button2.grid(column=0, row=19, pady=5, padx=5)
@@ -393,6 +442,8 @@ BruttoDostawa2ComboBox = ttk.Combobox(content_frame, width=27, textvariable=CzyB
 BruttoDostawa2ComboBox['values'] = ('Brutto', 'Netto')
 BruttoDostawa2ComboBox.grid(column=1,row=30, sticky=tk.E, padx=5, pady=5)
 BruttoDostawa2ComboBox.current(0)
+
+
 
 
 label11 = tk.Label(content_frame, text="Wybór oferty:")
@@ -442,6 +493,7 @@ def _on_mousewheel(event):
    canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
 canvas.bind_all("<MouseWheel>", _on_mousewheel)
+
 
 
 # Configure minimum and maximum window size
